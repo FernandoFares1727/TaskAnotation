@@ -1,0 +1,166 @@
+
+body {
+    background-color: #ADD8E6;
+}
+
+h1 {
+    text-align: center;
+    color: #333333;
+}
+
+hr {
+    border-top: 2px solid #333333;
+}
+
+#addTaskListButton {
+    /*margin: 15px;*/
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+}
+
+#addTaskListButton:hover {
+    background-color: #45a049;
+}
+
+/* css do card */
+
+.card {
+    /*background-color: #ffffff;*/
+    background-color: #d3d3d3;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px); /* Calcula o tamanho para que três cards apareçam lado a lado */
+    display: inline-flex; /* Altera para flexbox para melhor controle */
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    position: relative; /* Adiciona position: relative para o card */
+}
+
+.cardButtons {
+    display: flex;
+    justify-content: right;
+    gap: 8px;
+}
+
+.addTaskButton {
+    margin-top: 10px; /* Move o botão para a parte inferior */
+    align-self: flex-end; /* Alinha o botão à direita */
+    margin-right: 10px; /* Adiciona uma margem à direita */
+    
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addTaskButton:hover {
+    background-color: #45a049;
+}
+
+.deleteCard {
+    margin-top: 10px; /* Move o botão para a parte inferior */
+    align-self: flex-end; /* Alinha o botão à direita */
+    margin-right: 10px; /* Adiciona uma margem à direita */
+    
+    background-color: #EF0107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.deleteCard:hover {
+    background-color: #FF0000; /* Cor de fundo avermelhada ao passar o mouse */
+}
+
+.card h2 {
+    color: #333333;
+    margin: 0;
+    text-align: center;
+    /*background-color: #dcdcdc;*/
+    background-color: #acacac;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0; /* Arredonda apenas os cantos superiores */
+    padding: 5px; /* Adiciona algum preenchimento */
+}
+
+.taskCounter {
+    background-color: #d3d3d3;
+}
+
+.card p {
+    color: #666666;
+    padding: 10px; /* Adiciona algum preenchimento */
+    margin: 0; /* Remove a margem padrão */
+}
+
+.taskListBody {
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.taskListBody div {
+    display: flex;
+    padding: 0px;
+    background-color: white;
+}
+
+.taskListBody div button {
+    align-self: flex-end; /* Alinha o botão à direita */
+    margin-bottom: 10px;
+    margin-left: 8px;
+    
+    background-color: #EF0107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.taskListBody div button:hover {
+    background-color: #FF0000; /* Cor de fundo avermelhada ao passar o mouse */
+}
+
+/* dialog confirmação de deleção de task*/
+
+.confirmDeletionParent {
+    position : absolute;
+    top : 50%;
+    left : 50%;
+    transform : translate(-50%, -50%);
+    background-color : white;
+    /*padding : 20px;*/
+    border : 1px solid #ccc;
+    /*boxShadow : 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+}
+
+.confirmDeletion {
+    padding: 10px;
+}
+
+.deletionConfirmationTitle {
+    text-align: center;
+    margin: 0px;
+    background-color: #4CAF50;
+}
+
+.confirmDeletionButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirmDeletionButtons button {
+    background-color: #4CAF50;
+    border: none;
+}
+
+.confirmDeletionButtons button:hover {
+    background-color: #45a049;
+}

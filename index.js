@@ -1,9 +1,14 @@
-var cardFolder = './Cards/';
-var cardIndex = 'index.html';
+const cardFolder = './Cards/';
+const cardIndex = 'index.html';
 
-var dialogsFolder = './Dialogs/';
-var dialogsConfirmDeletionCard = 'confirmDeletionCardDialog.html';
-var dialogsConfirmDeletionTask = 'confirmDeletionDialog.html';
+const dialogsFolder = './Dialogs/';
+const dialogsConfirmDeletionCard = 'confirmDeletionCardDialog.html';
+const dialogsConfirmDeletionTask = 'confirmDeletionDialog.html';
+
+const dialogOptions = {
+    deleteCard: 1,
+    deleteTask: 2
+};
 
 
 function createCard()
@@ -60,36 +65,9 @@ function addTask(element) {
         .then(response => response.text())
         .then(html => {
 
-            taskDeleteButton.disabled = true;
-
-            var confirmationPanel = document.createElement('div');
-            confirmationPanel.innerHTML = html;
-            
-            var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDialogButtons');
-
-            var yesButton = document.createElement('button');
-            yesButton.textContent = "Yes";
-
-            yesButton.onclick = function() {
-                deleteTask(taskDiv);
-                updateCounOfTasks(card);
-                document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em Yes
-                taskDeleteButton.disabled = false;
-            };
-
-            var noButton = document.createElement('button');
-            noButton.textContent = "No";
-
-            noButton.onclick = function() {
-            document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em No
-            taskDeleteButton.disabled = false;
-            };
-
-            confirmDeletionDiv.appendChild(yesButton);
-            confirmDeletionDiv.appendChild(noButton);
-            document.body.appendChild(confirmationPanel);
-
-            draggableDialog(confirmationPanel);                  
+            var optionList = [card, taskDiv];
+            execDialog(taskDeleteButton, html, dialogOptions.deleteTask, optionList);  
+                     
         });
     }
 
@@ -108,38 +86,45 @@ function deleteCard(element)
     .then(response => response.text())
     .then(html => {
 
-        element.disabled = true;
+        var card = element.parentNode.parentNode;
+        var taskList = card.parentNode;
 
-        var confirmationPanel = document.createElement('div');
-        confirmationPanel.innerHTML = html;
-            
-        var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDialogButtons');
+        var optionList = [card, taskList];
+        execDialog(element, html, dialogOptions.deleteCard, optionList);
+    })
+}
 
-        var yesButton = document.createElement('button');
-        yesButton.textContent = "Yes";
+function execDialog(element, html, option, optionList)
+{
+    element.disabled = true;
 
-        yesButton.onclick = function() {
-            var card = element.parentNode.parentNode;
-            var taskList = card.parentNode;
-            document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em Yes
-            taskList.removeChild(card);
-            element.disabled = false;
+    var confirmationPanel = document.createElement('div');
+    confirmationPanel.innerHTML = html;
+        
+    var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDialogButtons');
+
+    var yesButton = document.createElement('button');
+    yesButton.textContent = "Yes";
+
+    yesButton.onclick = function() {
+        getDialogOption(option, optionList)
+        document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em Yes
+        element.disabled = false;
+    };
+
+    var noButton = document.createElement('button');
+    noButton.textContent = "No";
+
+    noButton.onclick = function() {
+        document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em No
+        element.disabled = false;
         };
 
-        var noButton = document.createElement('button');
-        noButton.textContent = "No";
+    confirmDeletionDiv.appendChild(yesButton);
+    confirmDeletionDiv.appendChild(noButton);
+    document.body.appendChild(confirmationPanel);
 
-        noButton.onclick = function() {
-            document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em No
-            element.disabled = false;
-            };
-
-        confirmDeletionDiv.appendChild(yesButton);
-        confirmDeletionDiv.appendChild(noButton);
-        document.body.appendChild(confirmationPanel);
-
-        draggableDialog(confirmationPanel);
-    })
+    draggableDialog(confirmationPanel);
 }
 
 function updateCounOfTasks(card)
@@ -201,4 +186,21 @@ function draggableDialog(confirmationPanel)
         document.addEventListener('mousemove', mouseMove);
         document.addEventListener('mouseup', mouseUp);
     });
+}
+
+function getDialogOption(option, optionList)
+{
+    if (option == dialogOptions.deleteCard)
+    {
+        var card = optionList[0];
+        var taskList = optionList[1];
+        taskList.removeChild(card);
+    }
+    else if (option == dialogOptions.deleteTask)
+    {
+        var card = optionList[0];
+        var taskDiv = optionList[1];
+        deleteTask(taskDiv);
+        updateCounOfTasks(card);
+    }
 }

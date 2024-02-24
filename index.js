@@ -82,37 +82,7 @@ function addTask(element) {
             confirmDeletionDiv.appendChild(noButton);
             document.body.appendChild(confirmationPanel);
 
-            var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
-            var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
-
-            confirmDeletionTitle.addEventListener('mousedown', (event) => {
-
-                let startX = event.clientX;
-                let startY = event.clientY;
-            
-                let offsetX, offsetY;
-            
-                const mouseMove = (event) => {
-                    offsetX = event.clientX - startX;
-                    offsetY = event.clientY - startY;
-            
-                    confirmDeletionParent.style.left = (confirmDeletionParent.offsetLeft + offsetX) + 'px';
-                    confirmDeletionParent.style.top = (confirmDeletionParent.offsetTop + offsetY) + 'px';
-            
-                    startX = event.clientX;
-                    startY = event.clientY;
-                };
-            
-                const mouseUp = () => {
-                    document.removeEventListener('mousemove', mouseMove);
-                    document.removeEventListener('mouseup', mouseUp);
-                };
-            
-                document.addEventListener('mousemove', mouseMove);
-                document.addEventListener('mouseup', mouseUp);
-            });
-            
-                       
+            draggableDialog(confirmationPanel);                  
         });
     }
 
@@ -161,35 +131,7 @@ function deleteCard(element)
         confirmDeletionDiv.appendChild(noButton);
         document.body.appendChild(confirmationPanel);
 
-        var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
-        var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
-
-        confirmDeletionTitle.addEventListener('mousedown', (event) => {
-
-            let startX = event.clientX;
-            let startY = event.clientY;
-        
-            let offsetX, offsetY;
-        
-            const mouseMove = (event) => {
-                offsetX = event.clientX - startX;
-                offsetY = event.clientY - startY;
-        
-                confirmDeletionParent.style.left = (confirmDeletionParent.offsetLeft + offsetX) + 'px';
-                confirmDeletionParent.style.top = (confirmDeletionParent.offsetTop + offsetY) + 'px';
-        
-                startX = event.clientX;
-                startY = event.clientY;
-            };
-        
-            const mouseUp = () => {
-                document.removeEventListener('mousemove', mouseMove);
-                document.removeEventListener('mouseup', mouseUp);
-            };
-        
-            document.addEventListener('mousemove', mouseMove);
-            document.addEventListener('mouseup', mouseUp);
-        });
+        draggableDialog(confirmationPanel);
     })
 }
 
@@ -219,4 +161,37 @@ function deleteTask(taskDiv)
 
     // Removendo taskDiv do DOM
     parentElement.removeChild(taskDiv);
+}
+
+function draggableDialog(confirmationPanel)
+{
+    var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
+    var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
+
+    confirmDeletionTitle.addEventListener('mousedown', (event) => {
+
+        let startX = event.clientX;
+        let startY = event.clientY;
+    
+        let offsetX, offsetY;
+    
+        const mouseMove = (event) => {
+            offsetX = event.clientX - startX;
+            offsetY = event.clientY - startY;
+    
+            confirmDeletionParent.style.left = (confirmDeletionParent.offsetLeft + offsetX) + 'px';
+            confirmDeletionParent.style.top = (confirmDeletionParent.offsetTop + offsetY) + 'px';
+    
+            startX = event.clientX;
+            startY = event.clientY;
+        };
+    
+        const mouseUp = () => {
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        };
+    
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('mouseup', mouseUp);
+    });
 }

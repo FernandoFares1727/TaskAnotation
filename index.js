@@ -1,8 +1,15 @@
+var cardFolder = './Cards/';
+var cardIndex = 'index.html';
+
+var dialogsFolder = './Dialogs/';
+var dialogsConfirmDeletionCard = 'confirmDeletionCardDialog.html';
+var dialogsConfirmDeletionTask = 'confirmDeletionDialog.html';
+
 
 function createCard()
 {
     // carrega o elemento 
-    fetch('./Cards/index.html')
+    fetch(cardFolder + cardIndex)
     .then(response => response.text())
     .then(html => {
         // Cria um novo elemento div
@@ -49,7 +56,7 @@ function addTask(element) {
     taskDeleteButton.onclick = function () {
         
         //criar painel de confirmação
-        fetch('./Dialogs/confirmDeletionDialog.html')
+        fetch(dialogsFolder + dialogsConfirmDeletionTask)
         .then(response => response.text())
         .then(html => {
 
@@ -97,7 +104,7 @@ function addTask(element) {
 function deleteCard(element)
 {
     //criar painel de confirmação
-    fetch('./Dialogs/confirmDeletionCardDialog.html')
+    fetch(dialogsFolder + dialogsConfirmDeletionCard)
     .then(response => response.text())
     .then(html => {
 

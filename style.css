@@ -1,4 +1,12 @@
 
+:root {
+    --buttonDefaultColor-- : #4CAF50;
+    --buttonDefaultColorHover--: #45a049;
+    --deletionButtonDefaultColor--: #EF0107;
+    --deletionButtonDefaultColorHover--: #FF0000;
+    --dialogTitleColor--: #4CAF50;
+}
+
 body {
     background-color: #ADD8E6;
 }
@@ -14,7 +22,7 @@ hr {
 
 #addTaskListButton {
     /*margin: 15px;*/
-    background-color: #4CAF50;
+    background-color: var(--buttonDefaultColor--);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -24,7 +32,7 @@ hr {
 }
 
 #addTaskListButton:hover {
-    background-color: #45a049;
+    background-color: var(--buttonDefaultColorHover--);
 }
 
 /* css do card */
@@ -52,7 +60,7 @@ hr {
     align-self: flex-end; /* Alinha o botão à direita */
     margin-right: 10px; /* Adiciona uma margem à direita */
     
-    background-color: #4CAF50;
+    background-color: var(--buttonDefaultColor--);
     color: white;
     border: none;
     border-radius: 5px;
@@ -60,7 +68,7 @@ hr {
 }
 
 .addTaskButton:hover {
-    background-color: #45a049;
+    background-color: var(--buttonDefaultColorHover--);
 }
 
 .deleteCard {
@@ -68,7 +76,7 @@ hr {
     align-self: flex-end; /* Alinha o botão à direita */
     margin-right: 10px; /* Adiciona uma margem à direita */
     
-    background-color: #EF0107;
+    background-color: var(--deletionButtonDefaultColor--);
     color: white;
     border: none;
     border-radius: 5px;
@@ -76,7 +84,7 @@ hr {
 }
 
 .deleteCard:hover {
-    background-color: #FF0000; /* Cor de fundo avermelhada ao passar o mouse */
+    background-color: var(--deletionButtonDefaultColorHover--); /* Cor de fundo avermelhada ao passar o mouse */
 }
 
 .card h2 {
@@ -116,7 +124,7 @@ hr {
     margin-bottom: 10px;
     margin-left: 8px;
     
-    background-color: #EF0107;
+    background-color: var(--deletionButtonDefaultColor--);
     color: white;
     border: none;
     border-radius: 5px;
@@ -124,7 +132,7 @@ hr {
 }
 
 .taskListBody div button:hover {
-    background-color: #FF0000; /* Cor de fundo avermelhada ao passar o mouse */
+    background-color: var(--deletionButtonDefaultColorHover--); /* Cor de fundo avermelhada ao passar o mouse */
 }
 
 /* dialog confirmação de deleção de task*/
@@ -147,7 +155,7 @@ hr {
 .titleDialog {
     text-align: center;
     margin: 0px;
-    background-color: #4CAF50;
+    background-color: var(--dialogTitleColor--);
 }
 
 .confirmDialogButtons {
@@ -157,10 +165,10 @@ hr {
 }
 
 .confirmDialogButtons button {
-    background-color: #4CAF50;
+    background-color: var(--buttonDefaultColor--);
     border: none;
 }
 
 .confirmDialogButtons button:hover {
-    background-color: #45a049;
+    background-color: var(--buttonDefaultColorHover--);
 }

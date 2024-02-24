@@ -129,7 +129,7 @@ hr {
 
 /* dialog confirmação de deleção de task*/
 
-.confirmDeletionParent {
+.parentDialog {
     position : absolute;
     top : 50%;
     left : 50%;
@@ -140,27 +140,27 @@ hr {
     /*boxShadow : 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
 }
 
-.confirmDeletion {
+.confirmDialog {
     padding: 10px;
 }
 
-.deletionConfirmationTitle {
+.titleDialog {
     text-align: center;
     margin: 0px;
     background-color: #4CAF50;
 }
 
-.confirmDeletionButtons {
+.confirmDialogButtons {
     display: flex;
     gap: 10px;
     justify-content: center;
 }
 
-.confirmDeletionButtons button {
+.confirmDialogButtons button {
     background-color: #4CAF50;
     border: none;
 }
 
-.confirmDeletionButtons button:hover {
+.confirmDialogButtons button:hover {
     background-color: #45a049;
 }

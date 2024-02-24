@@ -58,7 +58,7 @@ function addTask(element) {
             var confirmationPanel = document.createElement('div');
             confirmationPanel.innerHTML = html;
             
-            var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDeletionButtons');
+            var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDialogButtons');
 
             var yesButton = document.createElement('button');
             yesButton.textContent = "Yes";
@@ -82,8 +82,8 @@ function addTask(element) {
             confirmDeletionDiv.appendChild(noButton);
             document.body.appendChild(confirmationPanel);
 
-            var confirmDeletionParent = confirmationPanel.querySelector('.confirmDeletionParent');
-            var confirmDeletionTitle = confirmationPanel.querySelector('.deletionConfirmationTitle');
+            var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
+            var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
 
             confirmDeletionTitle.addEventListener('mousedown', (event) => {
 
@@ -126,10 +126,71 @@ function addTask(element) {
 
 function deleteCard(element)
 {
-    var card = element.parentNode.parentNode;
-    var taskList = card.parentNode;
+    //criar painel de confirmação
+    fetch('./Dialogs/confirmDeletionCardDialog.html')
+    .then(response => response.text())
+    .then(html => {
 
-    taskList.removeChild(card);
+        element.disabled = true;
+
+        var confirmationPanel = document.createElement('div');
+        confirmationPanel.innerHTML = html;
+            
+        var confirmDeletionDiv = confirmationPanel.querySelector('.confirmDialogButtons');
+
+        var yesButton = document.createElement('button');
+        yesButton.textContent = "Yes";
+
+        yesButton.onclick = function() {
+            var card = element.parentNode.parentNode;
+            var taskList = card.parentNode;
+            document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em Yes
+            taskList.removeChild(card);
+            element.disabled = false;
+        };
+
+        var noButton = document.createElement('button');
+        noButton.textContent = "No";
+
+        noButton.onclick = function() {
+            document.body.removeChild(confirmationPanel); // Remover o painel de confirmação após clicar em No
+            element.disabled = false;
+            };
+
+        confirmDeletionDiv.appendChild(yesButton);
+        confirmDeletionDiv.appendChild(noButton);
+        document.body.appendChild(confirmationPanel);
+
+        var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
+        var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
+
+        confirmDeletionTitle.addEventListener('mousedown', (event) => {
+
+            let startX = event.clientX;
+            let startY = event.clientY;
+        
+            let offsetX, offsetY;
+        
+            const mouseMove = (event) => {
+                offsetX = event.clientX - startX;
+                offsetY = event.clientY - startY;
+        
+                confirmDeletionParent.style.left = (confirmDeletionParent.offsetLeft + offsetX) + 'px';
+                confirmDeletionParent.style.top = (confirmDeletionParent.offsetTop + offsetY) + 'px';
+        
+                startX = event.clientX;
+                startY = event.clientY;
+            };
+        
+            const mouseUp = () => {
+                document.removeEventListener('mousemove', mouseMove);
+                document.removeEventListener('mouseup', mouseUp);
+            };
+        
+            document.addEventListener('mousemove', mouseMove);
+            document.addEventListener('mouseup', mouseUp);
+        });
+    })
 }
 
 function updateCounOfTasks(card)

@@ -160,6 +160,10 @@ function draggableDialog(confirmationPanel)
     var confirmDeletionParent = confirmationPanel.querySelector('.parentDialog');
     var confirmDeletionTitle = confirmationPanel.querySelector('.titleDialog');
 
+    /*var resizableDiv = document.createElement('div');
+    resizableDiv.classList.add('resizableDiv'); // Adicionando a classe 'resizableDiv'
+    confirmDeletionParent.appendChild(resizableDiv);*/
+
     confirmDeletionTitle.addEventListener('mousedown', (event) => {
 
         let startX = event.clientX;
@@ -186,6 +190,28 @@ function draggableDialog(confirmationPanel)
         document.addEventListener('mousemove', mouseMove);
         document.addEventListener('mouseup', mouseUp);
     });
+
+    /*resizableDiv.addEventListener('mousedown', (event) => {
+        let startX = event.clientX;
+        let startY = event.clientY;
+    
+        let w = confirmDeletionParent.clientWidth;
+        let h = confirmDeletionParent.clientHeight
+    
+        const mouseMove = (event) => {
+            
+            confirmDeletionParent.style.width = w + (event.pageX - startX) + 'px';
+            confirmDeletionParent.style.height = h + (event.pageY - startY) + 'px';
+        };
+    
+        const mouseUp = () => {
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        };
+    
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('mouseup', mouseUp);
+    })*/
 }
 
 function getDialogOption(option, optionList)

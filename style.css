@@ -150,6 +150,7 @@ hr {
 
 .confirmDialog {
     padding: 10px;
+    margin-bottom: 10px;
 }
 
 .titleDialog {
@@ -172,3 +173,13 @@ hr {
 .confirmDialogButtons button:hover {
     background-color: var(--buttonDefaultColorHover--);
 }
+
+/*.resizableDiv {
+    width: 15px;
+    height: 15px;
+    background-color: var(--dialogTitleColor--);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;  Altera o cursor ao passar sobre a div, indicando que é redimensionável na diagonal direita inferior 
+}*/
